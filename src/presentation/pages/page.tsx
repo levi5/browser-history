@@ -9,25 +9,27 @@ import styles from './styles.module.css'
 
 export function Page() {
   const loaderRef = useRef<HTMLDivElement | null>(null)
-  const { historyItems, loadHistoryAll, loadMore, removeItem, clearAll } = useHistory()
+  const { historyItems, loadHistoryAll, loadMore, removeItem, clearAll, hasMore } = useHistory()
 
   useEffect(() => {
     loadHistoryAll()
   }, [loadHistoryAll])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) loadMore()
-      },
-      { threshold: 1.0 }
-    )
-    if (loaderRef.current) observer.observe(loaderRef.current)
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (loaderRef.current) observer.unobserve(loaderRef.current)
-    }
-  }, [loadMore])
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    entries => {
+      if (entries[0].isIntersecting && hasMore) loadMore();
+    },
+    { threshold: 1.0 }
+  );
+
+  if (loaderRef.current) observer.observe(loaderRef.current);
+  return () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (loaderRef.current) observer.unobserve(loaderRef.current);
+  };
+}, [loadMore, hasMore]);
+
 
   const groupedHistory = useMemo(() => {
     const groups: Record<string, HistoryItemType[]> = {}
