@@ -9,27 +9,32 @@ import styles from './styles.module.css'
 
 export function Page() {
   const loaderRef = useRef<HTMLDivElement | null>(null)
-  const { historyItems, loadHistoryAll, loadMore, removeItem, clearAll, hasMore } = useHistory()
+  const { historyItems, loadHistoryAll, loadMore, removeItem, clearAll } = useHistory()
+
+  const titleStr = chrome.i18n.getMessage("title")
+
+   useEffect(() => {
+    document.title = titleStr
+  }, [historyItems, titleStr])
+
 
   useEffect(() => {
-    loadHistoryAll()
-  }, [loadHistoryAll])
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          loadMore()
+        }
+      },
+      { threshold: 1.0 }
+    )
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    entries => {
-      if (entries[0].isIntersecting && hasMore) loadMore();
-    },
-    { threshold: 1.0 }
-  );
+    if (loaderRef.current) observer.observe(loaderRef.current)
+    return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      if (loaderRef.current) observer.unobserve(loaderRef.current)
+    }
 
-  if (loaderRef.current) observer.observe(loaderRef.current);
-  return () => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    if (loaderRef.current) observer.unobserve(loaderRef.current);
-  };
-}, [loadMore, hasMore]);
-
+  }, [loadMore])
 
   const groupedHistory = useMemo(() => {
     const groups: Record<string, HistoryItemType[]> = {}
@@ -49,7 +54,7 @@ useEffect(() => {
 
   return (
     <div className={classNames(styles.page, styles.history)}>
-      <h1>{chrome.i18n.getMessage("title")}</h1>
+      <h1>{titleStr}</h1>
       <div className={styles.wrapperIcons}>
         <RotateCcw onClick={loadHistoryAll} size={16} className={styles.icon} />
         <Trash size={16} onClick={clearAll} className={classNames(styles.icon, styles.trash)} />
@@ -64,7 +69,7 @@ useEffect(() => {
                   <a href={url} target="_blank" rel="noreferrer">
                     <h3>{title || url}</h3>
                   </a>
-                  <Trash size={16} onClick={() => removeItem(url)} className={classNames(styles.icon, styles.trash)}/>
+                  <Trash size={16} onClick={() => removeItem(url)} className={classNames(styles.icon, styles.trash)} />
                 </li>
               ))}
             </ul>
