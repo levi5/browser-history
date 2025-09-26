@@ -18,23 +18,24 @@ export function Page() {
   }, [historyItems, titleStr])
 
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          loadMore()
-        }
-      },
-      { threshold: 1.0 }
-    )
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        loadMore()
+      }
+    },
+    { threshold: 0 }
+  )
 
-    if (loaderRef.current) observer.observe(loaderRef.current)
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      if (loaderRef.current) observer.unobserve(loaderRef.current)
-    }
+  if (loaderRef.current) observer.observe(loaderRef.current)
 
-  }, [loadMore])
+  return () => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (loaderRef.current) observer.unobserve(loaderRef.current)
+  }
+}, [loadMore])
+
 
   const groupedHistory = useMemo(() => {
     const groups: Record<string, HistoryItemType[]> = {}
