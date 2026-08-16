@@ -1,13 +1,17 @@
 {
   "manifest_version": 2,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "name": "__MSG_extension_name__",
   "description": "__MSG_extension_description__",
-  "permissions": ["history", "tabs"],
-
-   "default_locale": "pt",
+  "permissions": [
+    "history",
+    "tabs"
+  ],
+  "default_locale": "pt",
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "background.js"
+    ],
     "persistent": false
   },
   "browser_action": {
