@@ -1,83 +1,91 @@
-import { useEffect, useRef, useMemo } from "react"
-import classNames from "classnames"
-import { RotateCcw, Trash } from "lucide-react"
+import { useEffect, useRef, useMemo, useState } from "react"
 
-import type { HistoryItemType } from "../types/history"
 import { useHistory } from "../hooks/use-history"
+import { useSelection } from "../hooks/use-selection"
+import { SearchBar } from "../components/search-bar"
+import { ActionBar } from "../components/action-bar"
+import { HistoryGroup } from "../components/history-group"
+import { groupByDate, filterByQuery } from "../utils/history"
 
-import styles from './styles.module.css'
+import styles from "./styles.module.css"
 
 export function Page() {
-  const loaderRef = useRef<HTMLDivElement | null>(null)
-  const { historyItems, loadHistoryAll, loadMore, removeItem, clearAll } = useHistory()
+  const sentinelRef = useRef<HTMLDivElement | null>(null)
+  const { items, reload, loadMore, remove, removeBulk, clear } = useHistory()
 
-  const titleStr = chrome.i18n.getMessage("title")
+  const [query, setQuery] = useState("")
+  const selection = useSelection(filterByQuery(items, query))
 
-   useEffect(() => {
-    document.title = titleStr
-  }, [historyItems, titleStr])
+  const title = chrome.i18n.getMessage("title")
 
+  useEffect(() => { document.title = title }, [title])
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) {
-        loadMore()
-      }
-    },
-    { threshold: 0 }
-  )
+  useEffect(() => {
+    window.addEventListener("focus", reload)
+    return () => window.removeEventListener("focus", reload)
+  }, [reload])
 
-  if (loaderRef.current) observer.observe(loaderRef.current)
+  useEffect(() => {
+    const sentinel = sentinelRef.current
+    if (!sentinel) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) loadMore() },
+      { threshold: 0 }
+    )
+    observer.observe(sentinel)
+    return () => observer.unobserve(sentinel)
+  }, [loadMore])
 
-  return () => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    if (loaderRef.current) observer.unobserve(loaderRef.current)
+  const filtered = useMemo(() => filterByQuery(items, query), [items, query])
+  const grouped = useMemo(() => groupByDate(filtered), [filtered])
+
+  function handleDeleteSelected() {
+    removeBulk(Array.from(selection.selected))
+    selection.disable()
   }
-}, [loadMore])
 
-
-  const groupedHistory = useMemo(() => {
-    const groups: Record<string, HistoryItemType[]> = {}
-    historyItems.forEach(item => {
-      const date = new Date(item.lastVisitTime)
-      const key = date.toLocaleDateString(navigator.language, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
-      if (!groups[key]) groups[key] = []
-      groups[key].push(item)
-    })
-    return groups
-  }, [historyItems])
+  function handleToggleSelectMode() {
+    selection.active ? selection.disable() : selection.enable()
+  }
 
   return (
-    <div className={classNames(styles.page, styles.history)}>
-      <h1>{titleStr}</h1>
-      <div className={styles.wrapperIcons}>
-        <RotateCcw onClick={loadHistoryAll} size={16} className={styles.icon} />
-        <Trash size={16} onClick={clearAll} className={classNames(styles.icon, styles.trash)} />
-      </div>
-      <ul className={styles.historyList}>
-        {Object.entries(groupedHistory).map(([date, items]) => (
-          <li key={date} className={styles.group}>
-            <h2>{date}</h2>
-            <ul className={styles.subgroup}>
-              {items.map(({ id, url, title }) => (
-                <li key={id} className={styles.item}>
-                  <a href={url} target="_blank" rel="noreferrer">
-                    <h3>{title || url}</h3>
-                  </a>
-                  <Trash size={16} onClick={() => removeItem(url)} className={classNames(styles.icon, styles.trash)} />
-                </li>
-              ))}
-            </ul>
-          </li>
+    <div className={styles.page}>
+      <h1>{title}</h1>
+
+      <SearchBar value={query} onChange={setQuery} />
+
+      <ActionBar
+        isSelecting={selection.active}
+        selectedCount={selection.selected.size}
+        totalCount={filtered.length}
+        onReload={reload}
+        onClearAll={clear}
+        onToggleSelectMode={handleToggleSelectMode}
+        onDeleteSelected={handleDeleteSelected}
+        onToggleSelectAll={selection.toggleAll}
+      />
+
+      <ul className={styles.list}>
+        {Object.entries(grouped).map(([date, dateItems]) => (
+          <HistoryGroup
+            key={date}
+            date={date}
+            items={dateItems}
+            isSelecting={selection.active}
+            selectedUrls={selection.selected}
+            onToggleSelect={selection.toggle}
+            onRemove={remove}
+          />
         ))}
+
+        {filtered.length === 0 && query && (
+          <li className={styles.empty}>
+            Nenhum resultado para "<strong>{query}</strong>"
+          </li>
+        )}
       </ul>
-      <div ref={loaderRef} style={{ height: '30px' }} />
+
+      <div ref={sentinelRef} style={{ height: "30px" }} />
     </div>
   )
 }
