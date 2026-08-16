@@ -1,0 +1,62 @@
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+}
+
+.list {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.item {
+  padding: 1.4rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border-radius: 0.8rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.item:has(.checkbox) {
+  cursor: pointer;
+}
+
+.item.selected {
+  border-color: var(--bg-invert);
+  background-color: rgba(128, 128, 128, 0.08);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--bg-invert);
+}
+
+.link {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remove {
+  flex-shrink: 0;
+  color: var(--error);
+  cursor: pointer;
+}
