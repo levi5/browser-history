@@ -3,9 +3,180 @@
     "message": "Histórico"
   },
   "extension_description": {
-    "message": "Página de histórico"
+    "message": "Visualize e gerencie o histórico do navegador"
   },
   "title": {
     "message": "Histórico"
+  },
+  "search_placeholder": {
+    "message": "Pesquisar no histórico..."
+  },
+  "clear_search": {
+    "message": "Limpar pesquisa"
+  },
+  "select": {
+    "message": "Selecionar"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "delete_selected": {
+    "message": "Excluir ($1)"
+  },
+  "select_all": {
+    "message": "Selecionar todos"
+  },
+  "deselect_all": {
+    "message": "Desmarcar todos"
+  },
+  "reload": {
+    "message": "Recarregar"
+  },
+  "clear_all": {
+    "message": "Apagar todo o histórico"
+  },
+  "remove_entry": {
+    "message": "Remover do histórico"
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "loading_history": {
+    "message": "Carregando histórico..."
+  },
+  "loading_more": {
+    "message": "Carregando mais..."
+  },
+  "load_error": {
+    "message": "Não foi possível carregar o histórico."
+  },
+  "delete_error": {
+    "message": "Não foi possível excluir o histórico."
+  },
+  "restore_error": {
+    "message": "Não foi possível restaurar os itens."
+  },
+  "retry": {
+    "message": "Tentar novamente"
+  },
+  "empty_history": {
+    "message": "Nenhuma página no histórico."
+  },
+  "empty_search": {
+    "message": "Nenhum resultado para \"$1\""
+  },
+  "empty_filter": {
+    "message": "Nenhuma página corresponde aos filtros."
+  },
+  "clear_all_confirm": {
+    "message": "Apagar todo o histórico do navegador? Essa ação não pode ser desfeita."
+  },
+  "delete_entry_confirm": {
+    "message": "Remover esta página do histórico?"
+  },
+  "delete_selected_confirm": {
+    "message": "Excluir $1 itens do histórico?"
+  },
+  "period_filter": {
+    "message": "Período"
+  },
+  "period_all": {
+    "message": "Todo o período"
+  },
+  "period_today": {
+    "message": "Hoje"
+  },
+  "period_week": {
+    "message": "Últimos 7 dias"
+  },
+  "period_month": {
+    "message": "Últimos 30 dias"
+  },
+  "sort_order": {
+    "message": "Ordenar por"
+  },
+  "sort_recent": {
+    "message": "Mais recentes"
+  },
+  "sort_most_visited": {
+    "message": "Mais visitados"
+  },
+  "sort_title": {
+    "message": "Título (A-Z)"
+  },
+  "domain_filter": {
+    "message": "Domínio"
+  },
+  "domain_placeholder": {
+    "message": "ex.: example.com"
+  },
+  "clear_domain": {
+    "message": "Limpar domínio"
+  },
+  "export_csv": {
+    "message": "Exportar CSV"
+  },
+  "export_json": {
+    "message": "Exportar JSON"
+  },
+  "open_selected": {
+    "message": "Abrir selecionados"
+  },
+  "open_selected_confirm": {
+    "message": "Abrir $1 páginas em novas abas?"
+  },
+  "toggle_selection": {
+    "message": "Alternar seleção"
+  },
+  "deleted_items": {
+    "message": "$1 itens excluídos"
+  },
+  "undo": {
+    "message": "Desfazer"
+  },
+  "dismiss": {
+    "message": "Fechar"
+  },
+  "visit_count_one": {
+    "message": "1 visita"
+  },
+  "visit_count_many": {
+    "message": "$1 visitas"
+  },
+  "options_title": {
+    "message": "Configurações"
+  },
+  "settings_theme": {
+    "message": "Tema"
+  },
+  "theme_system": {
+    "message": "Seguir o sistema"
+  },
+  "theme_light": {
+    "message": "Claro"
+  },
+  "theme_dark": {
+    "message": "Escuro"
+  },
+  "page_size": {
+    "message": "Itens por página"
+  },
+  "page_size_option": {
+    "message": "$1 por página"
+  },
+  "confirm_delete_setting": {
+    "message": "Pedir confirmação antes de excluir"
+  },
+  "confirm_delete_hint": {
+    "message": "Aplica-se à exclusão de páginas individuais, em lote e ao histórico completo."
+  },
+  "options_saved": {
+    "message": "As alterações são salvas automaticamente."
+  },
+  "loading_settings": {
+    "message": "Carregando configurações..."
+  },
+  "open_history": {
+    "message": "Abrir histórico"
   }
 }

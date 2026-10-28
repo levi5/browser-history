@@ -3,9 +3,180 @@
     "message": "History"
   },
   "extension_description": {
-    "message": "History page"
+    "message": "View and manage your browser history"
   },
   "title": {
     "message": "History"
+  },
+  "search_placeholder": {
+    "message": "Search history..."
+  },
+  "clear_search": {
+    "message": "Clear search"
+  },
+  "select": {
+    "message": "Select"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "delete_selected": {
+    "message": "Delete ($1)"
+  },
+  "select_all": {
+    "message": "Select all"
+  },
+  "deselect_all": {
+    "message": "Deselect all"
+  },
+  "reload": {
+    "message": "Reload"
+  },
+  "clear_all": {
+    "message": "Clear all history"
+  },
+  "remove_entry": {
+    "message": "Remove from history"
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "loading_history": {
+    "message": "Loading history..."
+  },
+  "loading_more": {
+    "message": "Loading more..."
+  },
+  "load_error": {
+    "message": "Could not load your history."
+  },
+  "delete_error": {
+    "message": "Could not delete your history."
+  },
+  "restore_error": {
+    "message": "Could not restore the items."
+  },
+  "retry": {
+    "message": "Try again"
+  },
+  "empty_history": {
+    "message": "No pages in your history."
+  },
+  "empty_search": {
+    "message": "No results for \"$1\""
+  },
+  "empty_filter": {
+    "message": "No pages match the filters."
+  },
+  "clear_all_confirm": {
+    "message": "Delete your entire browser history? This action cannot be undone."
+  },
+  "delete_entry_confirm": {
+    "message": "Remove this page from history?"
+  },
+  "delete_selected_confirm": {
+    "message": "Delete $1 items from history?"
+  },
+  "period_filter": {
+    "message": "Period"
+  },
+  "period_all": {
+    "message": "All time"
+  },
+  "period_today": {
+    "message": "Today"
+  },
+  "period_week": {
+    "message": "Last 7 days"
+  },
+  "period_month": {
+    "message": "Last 30 days"
+  },
+  "sort_order": {
+    "message": "Sort by"
+  },
+  "sort_recent": {
+    "message": "Most recent"
+  },
+  "sort_most_visited": {
+    "message": "Most visited"
+  },
+  "sort_title": {
+    "message": "Title (A-Z)"
+  },
+  "domain_filter": {
+    "message": "Domain"
+  },
+  "domain_placeholder": {
+    "message": "e.g. example.com"
+  },
+  "clear_domain": {
+    "message": "Clear domain"
+  },
+  "export_csv": {
+    "message": "Export CSV"
+  },
+  "export_json": {
+    "message": "Export JSON"
+  },
+  "open_selected": {
+    "message": "Open selected"
+  },
+  "open_selected_confirm": {
+    "message": "Open $1 pages in new tabs?"
+  },
+  "toggle_selection": {
+    "message": "Toggle selection"
+  },
+  "deleted_items": {
+    "message": "$1 items deleted"
+  },
+  "undo": {
+    "message": "Undo"
+  },
+  "dismiss": {
+    "message": "Dismiss"
+  },
+  "visit_count_one": {
+    "message": "1 visit"
+  },
+  "visit_count_many": {
+    "message": "$1 visits"
+  },
+  "options_title": {
+    "message": "Settings"
+  },
+  "settings_theme": {
+    "message": "Theme"
+  },
+  "theme_system": {
+    "message": "Follow system"
+  },
+  "theme_light": {
+    "message": "Light"
+  },
+  "theme_dark": {
+    "message": "Dark"
+  },
+  "page_size": {
+    "message": "Items per page"
+  },
+  "page_size_option": {
+    "message": "$1 per page"
+  },
+  "confirm_delete_setting": {
+    "message": "Ask for confirmation before deleting"
+  },
+  "confirm_delete_hint": {
+    "message": "Applies to deleting single pages, selections, and the entire history."
+  },
+  "options_saved": {
+    "message": "Changes are saved automatically."
+  },
+  "loading_settings": {
+    "message": "Loading settings..."
+  },
+  "open_history": {
+    "message": "Open history"
   }
 }

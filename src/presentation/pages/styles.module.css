@@ -4,6 +4,7 @@
   min-height: 100vh;
   margin: 0 auto;
   padding: 2rem;
+  padding-bottom: 8rem;
 }
 
 .list {
@@ -19,4 +20,78 @@
   text-align: center;
   font-size: 1.4rem;
   opacity: 0.5;
+}
+
+.status {
+  padding: 1.6rem 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  opacity: 0.7;
+}
+
+.retry {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.3rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.retry:hover {
+  background-color: var(--border);
+}
+
+.undo {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: calc(100vw - 4rem);
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background-color: var(--bg-secondary);
+  box-shadow: 0 0.4rem 1.6rem rgba(0, 0, 0, 0.18);
+  font-size: 1.3rem;
+}
+
+.undoMessage {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.undoButton {
+  flex-shrink: 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--bg);
+  background-color: var(--bg-invert);
+}
+
+.undoButton:hover {
+  opacity: 0.85;
+}
+
+.undoClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  color: var(--text);
+}
+
+.undoClose:hover {
+  background-color: var(--border);
 }

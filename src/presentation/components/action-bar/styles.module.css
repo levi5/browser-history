@@ -4,15 +4,39 @@
   padding: 1.2rem 0;
   gap: 1rem;
   flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
 }
 
-.icon {
+.group {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.groupEnd {
+  margin-left: auto;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: transparent;
   color: var(--bg-invert);
   cursor: pointer;
   flex-shrink: 0;
+  transition: background-color 0.15s;
 }
 
-.icon.danger {
+.iconButton:hover {
+  background-color: var(--border);
+}
+
+.iconButton.danger {
   color: var(--error);
 }
 
@@ -35,6 +59,15 @@
   background-color: var(--border);
 }
 
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn:disabled:hover {
+  background-color: var(--bg-secondary);
+}
+
 .btnActive {
   border-color: var(--bg-invert);
   background-color: var(--bg-invert);
@@ -54,4 +87,9 @@
 .btnDanger:hover {
   background-color: var(--error);
   color: #fff;
+}
+
+.btnDanger:disabled:hover {
+  background-color: var(--bg-secondary);
+  color: var(--error);
 }
