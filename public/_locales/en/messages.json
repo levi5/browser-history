@@ -20,6 +20,15 @@
   "cancel": {
     "message": "Cancel"
   },
+  "confirm_title": {
+    "message": "Confirm action"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "open": {
+    "message": "Open"
+  },
   "delete_selected": {
     "message": "Delete ($1)"
   },

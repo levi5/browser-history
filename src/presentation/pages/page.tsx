@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { X } from "lucide-react"
 
 import { ActionBar } from "../components/action-bar"
+import { ConfirmDialog } from "../components/confirm-dialog"
 import { FiltersBar } from "../components/filters-bar"
 import { HistoryGroup } from "../components/history-group"
 import { SearchBar } from "../components/search-bar"
@@ -28,6 +29,13 @@ interface UndoState {
   items: HistoryItemType[]
 }
 
+interface ConfirmRequest {
+  message: string
+  confirmLabel: string
+  destructive?: boolean
+  resolve: (confirmed: boolean) => void
+}
+
 export function Page() {
   const { settings } = useSettings()
   const sentinelRef = useRef<HTMLDivElement | null>(null)
@@ -36,6 +44,8 @@ export function Page() {
   const [domain, setDomain] = useState("")
   const [sort, setSort] = useState<SortOrder>("recent")
   const [undoState, setUndoState] = useState<UndoState | null>(null)
+  const [confirmRequest, setConfirmRequest] =
+    useState<ConfirmRequest | null>(null)
 
   const {
     items,
@@ -123,6 +133,26 @@ export function Page() {
     }
   }, [items.length, loading, loadingMore, hasMore, loadMore])
 
+  function requestConfirm(
+    message: string,
+    confirmLabel: string,
+    destructive = false
+  ) {
+    return new Promise<boolean>(resolve => {
+      setConfirmRequest({ message, confirmLabel, destructive, resolve })
+    })
+  }
+
+  function handleConfirmDialog() {
+    confirmRequest?.resolve(true)
+    setConfirmRequest(null)
+  }
+
+  function handleCancelDialog() {
+    confirmRequest?.resolve(false)
+    setConfirmRequest(null)
+  }
+
   async function handleDeleteSelected() {
     const selectedItems = items.filter(item =>
       selection.selectedUrls.has(item.url)
@@ -132,9 +162,11 @@ export function Page() {
 
     if (
       settings.confirmDelete &&
-      !window.confirm(
-        t("delete_selected_confirm", String(selectedItems.length))
-      )
+      !(await requestConfirm(
+        t("delete_selected_confirm", String(selectedItems.length)),
+        t("delete"),
+        true
+      ))
     ) {
       return
     }
@@ -157,7 +189,7 @@ export function Page() {
   async function handleRemove(item: HistoryItemType) {
     if (
       settings.confirmDelete &&
-      !window.confirm(t("delete_entry_confirm"))
+      !(await requestConfirm(t("delete_entry_confirm"), t("delete"), true))
     ) {
       return
     }
@@ -199,7 +231,10 @@ export function Page() {
 
     if (
       urls.length > OPEN_SELECTED_CONFIRM_THRESHOLD &&
-      !window.confirm(t("open_selected_confirm", String(urls.length)))
+      !(await requestConfirm(
+        t("open_selected_confirm", String(urls.length)),
+        t("open")
+      ))
     ) {
       return
     }
@@ -210,7 +245,7 @@ export function Page() {
   async function handleClearAll() {
     if (
       settings.confirmDelete &&
-      !window.confirm(t("clear_all_confirm"))
+      !(await requestConfirm(t("clear_all_confirm"), t("clear_all"), true))
     ) {
       return
     }
@@ -341,6 +376,16 @@ export function Page() {
             <X size={14} />
           </button>
         </div>
+      )}
+
+      {confirmRequest && (
+        <ConfirmDialog
+          message={confirmRequest.message}
+          confirmLabel={confirmRequest.confirmLabel}
+          destructive={confirmRequest.destructive}
+          onConfirm={handleConfirmDialog}
+          onCancel={handleCancelDialog}
+        />
       )}
 
       <div ref={sentinelRef} style={{ height: "30px" }} />
