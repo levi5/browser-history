@@ -3,4 +3,5 @@ export type HistoryItemType = {
   url: string
   title?: string
   lastVisitTime: number
+  visitCount?: number
 }

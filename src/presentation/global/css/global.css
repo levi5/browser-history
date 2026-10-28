@@ -28,3 +28,8 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
+
+:focus-visible {
+  outline: 2px solid var(--bg-invert);
+  outline-offset: 2px;
+}

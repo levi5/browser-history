@@ -1,0 +1,96 @@
+.page {
+  max-width: 64rem;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 3.2rem 2rem;
+}
+
+.loading {
+  padding: 3.2rem 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  opacity: 0.7;
+}
+
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.choice input {
+  width: 1.6rem;
+  height: 1.6rem;
+  accent-color: var(--bg-invert);
+  cursor: pointer;
+}
+
+.select {
+  width: 100%;
+  max-width: 24rem;
+  height: 3.6rem;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.select:focus {
+  border-color: var(--bg-invert);
+}
+
+.hint {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.saved {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.button {
+  margin-top: 1.6rem;
+  padding: 0.8rem 1.4rem;
+  border: 1px solid var(--bg-invert);
+  border-radius: 0.6rem;
+  background-color: var(--bg-invert);
+  color: var(--bg);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.button:hover {
+  opacity: 0.85;
+}

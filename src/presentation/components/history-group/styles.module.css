@@ -18,7 +18,7 @@
 .item {
   padding: 1.4rem 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.2rem;
   border-radius: 0.8rem;
   background-color: var(--bg-secondary);
@@ -26,7 +26,7 @@
   transition: border-color 0.15s, background-color 0.15s;
 }
 
-.item:has(.checkbox) {
+.item.selecting {
   cursor: pointer;
 }
 
@@ -36,15 +36,51 @@
 }
 
 .checkbox {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   flex-shrink: 0;
+  padding: 0.2rem;
+  margin-top: 0.2rem;
+  border-radius: 0.4rem;
   color: var(--bg-invert);
+  transition: background-color 0.15s;
+}
+
+.checkbox:hover {
+  background-color: var(--border);
+}
+
+.faviconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.favicon {
+  width: 1.6rem;
+  height: 1.6rem;
+  object-fit: contain;
+  border-radius: 0.2rem;
+}
+
+.faviconFallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-invert);
+  opacity: 0.6;
 }
 
 .link {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .title {
@@ -55,8 +91,34 @@
   text-overflow: ellipsis;
 }
 
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-size: 1.15rem;
+  opacity: 0.6;
+}
+
+.metaItem {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .remove {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: transparent;
   flex-shrink: 0;
   color: var(--error);
   cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.remove:hover {
+  background-color: var(--border);
 }

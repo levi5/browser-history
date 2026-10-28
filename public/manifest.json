@@ -1,20 +1,37 @@
 {
-  "manifest_version": 2,
-  "version": "1.0.4",
+  "manifest_version": 3,
+  "version": "1.1.0",
+  "minimum_chrome_version": "121",
   "name": "__MSG_extension_name__",
   "description": "__MSG_extension_description__",
   "permissions": [
     "history",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "default_locale": "pt",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{8153c42b-02ae-41dc-ad8c-fd89774c3820}",
+      "strict_min_version": "115.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
   "background": {
+    "service_worker": "background.js",
     "scripts": [
       "background.js"
-    ],
-    "persistent": false
+    ]
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",
